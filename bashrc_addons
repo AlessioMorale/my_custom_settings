@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# eval "$(starship init bash)"
 function _update_ps1() {
     PS1=$(powerline-shell $?)
 }
@@ -10,13 +11,20 @@ fi
 
 eval "$(direnv hook bash)"
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+alias l='lsd'
+alias la='ls -a'
+alias ll='ls -lah'
+alias ls='ls --color=auto'
+alias cat='batcat'
 
-alias l='exa'
-alias la='exa -a'
-alias ll='exa -lah'
-alias ls='exa --color=auto'
+alias dive="docker run -ti --rm  -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive"
+
+#some docker alias
+alias dokill='docker kill `docker ps -q`'
+alias dormall='docker rm `docker ps -qa`'
+alias doco='docker compose'
+alias ctop='docker run --rm -ti --name=ctop --volume /var/run/docker.sock:/var/run/docker.sock:ro quay.io/vektorlab/ctop:latest'
+alias lzd='docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock -v /home/amorale/.lazydocker_config:/.config/jesseduffield/lazydocker lazyteam/lazydocker'
+alias nvitop="pipx run nvitop"
 
 source "$HOME/.local/share/blesh/ble.sh"
